@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
-
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
@@ -14,13 +11,20 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">   <!-- 👈 REQUIRED for Android 12+ -->
+            android:exported="true"> <!-- 👈 REQUIRED for Android 12+ -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
+    <!-- ✅ Only keep ONE set of each permission -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
 </manifest>
