@@ -7,15 +7,19 @@ import android.os.Bundle
 import android.os.Looper
 import android.telephony.SmsManager
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationText: TextView
+
     private val LOCATION_PERMISSION_REQUEST = 100
     private val SMS_PERMISSION_REQUEST = 101
 
@@ -23,9 +27,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize views
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
+        locationText = findViewById(R.id.locationText)
         val btnSendEmergency: Button = findViewById(R.id.btnSendEmergency)
+
         btnSendEmergency.setOnClickListener {
             checkAndRequestPermissions()
         }
@@ -51,7 +57,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (permissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsNeeded.toTypedArray(), LOCATION_PERMISSION_REQUEST)
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsNeeded.toTypedArray(),
+                LOCATION_PERMISSION_REQUEST
+            )
         } else {
             getLocation()
         }
@@ -59,20 +69,28 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
+        // First try last known location
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
+                val locString = "Lat: ${location.latitude}, Lng: ${location.longitude}"
+                locationText.text = "Location: $locString"
                 sendEmergencySms(location.latitude, location.longitude)
             } else {
+                // If no cached location, request new one
                 requestNewLocation()
             }
+        }.addOnFailureListener {
+            // If failed, request new one
+            requestNewLocation()
         }
     }
 
     @SuppressLint("MissingPermission")
     private fun requestNewLocation() {
         val locationRequest = LocationRequest.Builder(
-            Priority.PRIORITY_HIGH_ACCURACY, 1000
-        ).setMaxUpdates(1).build()
+            Priority.PRIORITY_HIGH_ACCURACY, 2000 // every 2 sec until success
+        ).setMaxUpdates(1) // only get 1 fresh location
+            .build()
 
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
@@ -80,6 +98,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onLocationResult(locationResult: LocationResult) {
                     val location = locationResult.lastLocation
                     if (location != null) {
+                        val locString = "Lat: ${location.latitude}, Lng: ${location.longitude}"
+                        locationText.text = "Location: $locString"
                         sendEmergencySms(location.latitude, location.longitude)
                     } else {
                         Toast.makeText(applicationContext, "Location not available", Toast.LENGTH_SHORT).show()
@@ -91,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+
     private fun sendEmergencySms(latitude: Double, longitude: Double) {
         val message = "🚨 Emergency! I need help. My location: https://maps.google.com/?q=$latitude,$longitude"
         val phoneNumber = "1234567890" // replace with your emergency number
@@ -98,9 +119,19 @@ class MainActivity : AppCompatActivity() {
         try {
             val smsManager = SmsManager.getDefault()
             smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+
+            // Success feedback
             Toast.makeText(this, "Emergency message sent!", Toast.LENGTH_LONG).show()
+
         } catch (e: Exception) {
-            Toast.makeText(this, "Failed to send SMS: ${e.message}", Toast.LENGTH_LONG).show()
+            // Retry option with Snackbar
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "Failed to send SMS",
+                Snackbar.LENGTH_INDEFINITE
+            ).setAction("Retry") {
+                sendEmergencySms(latitude, longitude)
+            }.show()
         }
     }
 
