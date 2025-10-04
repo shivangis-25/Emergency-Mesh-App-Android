@@ -1,15 +1,41 @@
+<<<<<<< HEAD
 *.iml
 .gradle
 /local.properties
+=======
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android Studio
+.idea/
+*.iml
+local.properties
+>>>>>>> 9d31b6d71182f469c48347bdcf76c8b4091f9cc8
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+<<<<<<< HEAD
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+=======
+
+# Logs
+*.log
+
+# Captures
+captures/
+.externalNativeBuild/
+.cxx
+
+.DS_Store
+
+>>>>>>> 9d31b6d71182f469c48347bdcf76c8b4091f9cc8
