@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.emergency.mesh.R
 import com.emergency.mesh.data.Message
-import com.emergency.mesh.data.MessageRepository
+import com.emergency.mesh.data.MessageRepository2
 import com.emergency.mesh.data.RoomMessageRepository
 import com.emergency.mesh.db.AppDatabase
 import com.emergency.mesh.p2p.MeshManager
@@ -28,7 +28,7 @@ class MapsActivity : AppCompatActivity() {
         val messageViewModel: MessageViewModel by viewModels {
             val context = this@MapsActivity
             val database = AppDatabase.getDatabase(context) // Line 33
-            val repository: MessageRepository = RoomMessageRepository(database.messageDao()) // Line 34
+            val repository: MessageRepository2 = RoomMessageRepository(database.messageDao()) // Line 34
             val meshManager = MeshManager(context) // Line 35
             ViewModelFactory(repository, meshManager)
         }

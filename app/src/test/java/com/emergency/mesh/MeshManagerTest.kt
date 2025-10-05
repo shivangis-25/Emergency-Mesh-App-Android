@@ -1,18 +1,17 @@
 package com.emergency.mesh.mesh
 
 import com.emergency.mesh.data.MessageEntity
-import com.emergency.mesh.data.MessageRepository
+import com.emergency.mesh.data.MessageRepository2
 import com.emergency.mesh.p2p.P2PSender
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import kotlin.test.assertTrue
 
 class MeshManagerTest {
     private val mockSender = mockk<P2PSender>(relaxed = true)
-    private val fakeRepo = mockk<MessageRepository>()
+    private val fakeRepo = mockk<MessageRepository2>()
 
     @Test
     fun `rebroadcasts valid message`() = runBlocking {

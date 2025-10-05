@@ -16,7 +16,7 @@ import com.example.emergnecymesh.model.Message
 import com.example.emergnecymesh.p2p.P2PManager
 import java.util.UUID
 
-class MainActivity : AppCompatActivity() {
+class MainActivity1 : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main1)
 
         // Generate unique device ID
         deviceId = "Device_${UUID.randomUUID().toString().substring(0, 8)}"

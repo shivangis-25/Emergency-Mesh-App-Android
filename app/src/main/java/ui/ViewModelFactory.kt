@@ -2,11 +2,11 @@ package com.emergency.mesh.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.emergency.mesh.data.MessageRepository
+import com.emergency.mesh.data.MessageRepository2
 import com.emergency.mesh.p2p.MeshManager
 
 class ViewModelFactory(
-    private val repository: MessageRepository,
+    private val repository: MessageRepository2,
     private val meshManager: MeshManager
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

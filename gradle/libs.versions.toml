@@ -1,6 +1,6 @@
 [versions]
-agp = "8.7.3"
-kotlin = "1.9.25"
+agp = "8.13.0"
+kotlin = "1.9.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -12,6 +12,7 @@ constraintlayout = "2.1.4"
 room = "2.6.1"
 lifecycle = "2.6.2"
 googlePlayServicesLocation = "21.0.1"
+nearbyConnections = "19.0.0"
 osmdroid = "6.1.16"
 coreBom = "2024.01.00"
 
@@ -26,14 +27,14 @@ androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-core-bom = { module = "androidx.core:core-bom", version.ref = "coreBom" }
 
-
-# New Libraries with correct format
+# Room and other libraries
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
 google-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "googlePlayServicesLocation" }
+google-play-services-nearby = { module = "com.google.android.gms:play-services-nearby", version.ref = "nearbyConnections" }
 osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroid" }
 
 [plugins]

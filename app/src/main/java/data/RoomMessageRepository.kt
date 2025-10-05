@@ -5,8 +5,12 @@ import com.emergency.mesh.db.MessageEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-// Implementation of MessageRepository that uses Room for local storage.
-class RoomMessageRepository(private val messageDao: MessageDao) : MessageRepository {
+/**
+ * Implementation of MessageRepository using Room.
+ */
+class RoomMessageRepository(
+    private val messageDao: MessageDao
+) : MessageRepository2 {
 
     override suspend fun saveMessage(message: Message) {
         val entity = MessageEntity(
@@ -21,29 +25,24 @@ class RoomMessageRepository(private val messageDao: MessageDao) : MessageReposit
         messageDao.insert(entity)
     }
 
-    override suspend fun getUnsyncedMessages(): List<Message> {
-        return messageDao.getUnsyncedMessages().map { it.toMessage() }
-    }
+    override suspend fun getUnsyncedMessages(): List<Message> =
+        messageDao.getUnsyncedMessages().map { it.toMessage() }
 
-    override suspend fun markAsSynced(messageId: String) {
+    override suspend fun markAsSynced(messageId: String) =
         messageDao.markAsSynced(messageId)
-    }
 
-    override fun getAllMessages(): Flow<List<Message>> {
-        return messageDao.getAllMessages().map { entities ->
-            entities.map { it.toMessage() }
-        }
-    }
+    override fun getAllMessages(): Flow<List<Message>> =
+        messageDao.getAllMessages().map { list -> list.map { it.toMessage() } }
 
-    private fun MessageEntity.toMessage(): Message {
-        return Message(
-            id = this.id,
-            text = this.text,
-            latitude = this.latitude,
-            longitude = this.longitude,
-            timestamp = this.timestamp,
-            isSynced = this.isSynced,
-            messageType = this.messageType
+    // Extension function to convert Room entity to domain model
+    private fun MessageEntity.toMessage(): Message =
+        Message(
+            id = id,
+            text = text,
+            latitude = latitude,
+            longitude = longitude,
+            timestamp = timestamp,
+            isSynced = isSynced,
+            messageType = messageType
         )
-    }
 }

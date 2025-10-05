@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "EmergencyMeshApp2" // Or your exact project name
+rootProject.name = "EmergencyMeshApp2" // Change if needed
 include(":app")

@@ -2,13 +2,13 @@ package com.emergency.mesh.ui
 
 import androidx.lifecycle.*
 import com.emergency.mesh.data.Message
-import com.emergency.mesh.data.MessageRepository
+import com.emergency.mesh.data.MessageRepository2
 import com.emergency.mesh.p2p.MeshManager
 import kotlinx.coroutines.launch
 import java.util.UUID
 
 class MessageViewModel(
-    private val repository: MessageRepository,
+    private val repository: MessageRepository2,
     private val meshManager: MeshManager
 ) : ViewModel() {
 

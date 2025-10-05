@@ -3,8 +3,11 @@ package com.emergency.mesh.db
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.UUID
+import androidx.annotation.Keep
 
-// Represents a message stored in the local Room database.
+/**
+ * Represents a message stored in the local Room database.
+ */
 @Entity(tableName = "messages")
 data class MessageEntity(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
@@ -14,5 +17,5 @@ data class MessageEntity(
     val locationName: String? = null, // e.g., "Bengaluru, Karnataka, India"
     val timestamp: Long = System.currentTimeMillis(),
     val isSynced: Boolean = false,
-    val messageType: String // "SOS" or "SAFE"
+    val messageType: String = "SOS" // default type, can be "SOS" or "SAFE"
 )

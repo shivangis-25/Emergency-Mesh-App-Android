@@ -10,8 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.emergency.mesh.data.Message
-import com.emergency.mesh.data.MessageRepository
+import com.emergency.mesh.data.MessageRepository2
 import com.emergency.mesh.data.RoomMessageRepository
 import com.emergency.mesh.databinding.ActivityMainBinding
 import com.emergency.mesh.db.AppDatabase
@@ -21,16 +20,16 @@ import com.google.android.gms.location.LocationServices
 // The import paths from your original code have been corrected here.
 // For example, ViewModelFactory is now imported from com.emergency.mesh.ui, not com.emergency.mesh.ui.viewmodel
 
-class MainActivity : AppCompatActivity() {
+class `MainActivity3` : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val messageAdapter = MessageAdapter()
     private val fusedLocationClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
 
     private val messageViewModel: MessageViewModel by viewModels {
-        val context = this@MainActivity
+        val context = this@`MainActivity3`
         val database = AppDatabase.getDatabase(context) // Line 33
-        val repository: MessageRepository = RoomMessageRepository(database.messageDao()) // Line 34
+        val repository: MessageRepository2 = RoomMessageRepository(database.messageDao()) // Line 34
         val meshManager = MeshManager(context) // Line 35
         ViewModelFactory(repository, meshManager)
     }
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         binding.messagesRecyclerView.apply {
             adapter = messageAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@`MainActivity3`)
         }
     }
 
