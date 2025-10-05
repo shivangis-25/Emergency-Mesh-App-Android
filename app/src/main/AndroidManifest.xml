@@ -9,6 +9,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
 
+    <!-- Bluetooth permissions for P2P -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,8 +30,9 @@
         android:theme="@style/Theme.EmergencyMeshApp"
         tools:targetApi="31">
 
+        <!-- HOME ACTIVITY - Main Launcher -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +40,22 @@
             </intent-filter>
         </activity>
 
+        <!-- Emergency SMS Activity (Dev2) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- Mesh Network Activity (Dev1) -->
+        <activity
+            android:name=".MainActivity1"
+            android:exported="false" />
+
+        <!-- Emergency Map Activity (Dev3) -->
+        <activity
+            android:name=".ui.MainActivity3"
+            android:exported="false" />
+
+        <!-- Maps Activity -->
         <activity
             android:name=".ui.MapsActivity"
             android:exported="false" />
