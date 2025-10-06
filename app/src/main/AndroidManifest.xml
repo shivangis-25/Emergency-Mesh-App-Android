@@ -57,7 +57,7 @@
 
         <!-- Maps Activity -->
         <activity
-            android:name=".ui.MapsActivity"
+            android:name=".ui.MapActivity"
             android:exported="false" />
 
     </application>
