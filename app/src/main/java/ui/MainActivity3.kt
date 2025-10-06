@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.emergency.mesh.R
 import com.emergency.mesh.data.MessageRepository2
 import com.emergency.mesh.data.RoomMessageRepository
 import com.emergency.mesh.databinding.ActivityMainBinding
@@ -17,20 +18,17 @@ import com.emergency.mesh.db.AppDatabase
 import com.emergency.mesh.p2p.MeshManager
 import com.google.android.gms.location.LocationServices
 
-// The import paths from your original code have been corrected here.
-// For example, ViewModelFactory is now imported from com.emergency.mesh.ui, not com.emergency.mesh.ui.viewmodel
-
-class `MainActivity3` : AppCompatActivity() {
+class MainActivity3 : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val messageAdapter = MessageAdapter()
     private val fusedLocationClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
 
     private val messageViewModel: MessageViewModel by viewModels {
-        val context = this@`MainActivity3`
-        val database = AppDatabase.getDatabase(context) // Line 33
-        val repository: MessageRepository2 = RoomMessageRepository(database.messageDao()) // Line 34
-        val meshManager = MeshManager(context) // Line 35
+        val context = this@MainActivity3
+        val database = AppDatabase.getDatabase(context)
+        val repository: MessageRepository2 = RoomMessageRepository(database.messageDao())
+        val meshManager = MeshManager(context)
         ViewModelFactory(repository, meshManager)
     }
 
@@ -38,7 +36,6 @@ class `MainActivity3` : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show()
-                // You might want to automatically send a message here if one was pending
             } else {
                 Toast.makeText(this, "Location permission is required to send messages", Toast.LENGTH_LONG).show()
             }
@@ -58,7 +55,7 @@ class `MainActivity3` : AppCompatActivity() {
     private fun setupRecyclerView() {
         binding.messagesRecyclerView.apply {
             adapter = messageAdapter
-            layoutManager = LinearLayoutManager(this@`MainActivity3`)
+            layoutManager = LinearLayoutManager(this@MainActivity3)
         }
     }
 
@@ -78,7 +75,7 @@ class `MainActivity3` : AppCompatActivity() {
         binding.viewMapButton.setOnClickListener {
             val messages = messageViewModel.allMessages.value ?: emptyList()
             if (messages.isNotEmpty()) {
-                val intent = Intent(this, MapsActivity::class.java).apply {
+                val intent = Intent(this, MapActivity::class.java).apply {
                     putParcelableArrayListExtra("MESSAGES_LIST", ArrayList(messages))
                 }
                 startActivity(intent)
@@ -102,7 +99,6 @@ class `MainActivity3` : AppCompatActivity() {
                     Toast.makeText(this, "Failed to get location.", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: SecurityException) {
-                // This catch is good practice, though hasLocationPermission() should prevent it.
                 Toast.makeText(this, "Location access denied.", Toast.LENGTH_SHORT).show()
             }
         } else {
