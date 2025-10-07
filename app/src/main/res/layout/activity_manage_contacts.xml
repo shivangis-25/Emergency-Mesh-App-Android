@@ -1,46 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".ManageContactsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- 🔹 Screen Heading -->
+        <TextView
+            android:id="@+id/tvHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Emergency Contacts Manager"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:paddingBottom="12dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="40dp"/>
+
+        <!-- 🔹 Contact Name -->
         <EditText
             android:id="@+id/etName"
             android:hint="Contact Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:layout_marginTop="8dp" />
 
+        <!-- 🔹 Contact Number -->
         <EditText
             android:id="@+id/etNumber"
             android:hint="Phone Number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:layout_marginTop="8dp" />
 
+        <!-- 🔹 Relationship (Optional) -->
         <EditText
             android:id="@+id/etRelation"
             android:hint="Relationship (optional)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
-
-        <Button
-            android:id="@+id/btnAddContact"
-            android:text="Add Contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:inputType="text"
             android:layout_marginTop="8dp" />
 
+        <!-- 🔹 Add Contact Button -->
+        <Button
+            android:id="@+id/btnAddContact"
+            android:text="➕ Add Contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#ccc"
-            android:layout_marginVertical="10dp" />
+            android:background="#CCCCCC"
+            android:layout_marginVertical="12dp" />
+
+        <!-- 🔹 Contact List Section -->
+        <TextView
+            android:id="@+id/tvSavedContacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saved Contacts:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingBottom="6dp" />
 
         <LinearLayout
             android:id="@+id/contactListView"
