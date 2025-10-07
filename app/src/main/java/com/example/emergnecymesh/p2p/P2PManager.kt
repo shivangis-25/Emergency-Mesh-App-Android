@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 /**
  * P2PManager handles peer-to-peer communication using Google Nearby Connections API.
  * Implements advertising, discovery, and message sending/receiving.

@@ -124,23 +124,16 @@ class MainActivity1 : AppCompatActivity() {
         // Set up message listener
         p2pManager.listener = { message ->
             runOnUiThread {
+                val formattedTime = P2PManager.formatTimestamp(message.timestamp)
                 val receivedMsg = "From: ${message.senderId}\n" +
                         "Content: ${message.content}\n" +
-                        "Time: ${message.timestamp}\n" +
+                        "Time: $formattedTime\n" +
                         "Hops: ${message.hopCount}\n\n"
 
                 receivedText.text = receivedMsg + receivedText.text
-
-                Toast.makeText(
-                    this,
-                    "Message received: ${message.content}",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                Log.d(TAG, "Message received: $message")
+                // ... rest of code
             }
         }
-
         updateStatus("P2P Manager initialized - Device: $deviceId")
     }
 
