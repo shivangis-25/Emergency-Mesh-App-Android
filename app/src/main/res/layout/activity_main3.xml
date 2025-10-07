@@ -1,27 +1,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp"
-    android:background="#FFFFFF">
+    android:padding="16dp"
+    tools:context=".ui.MainActivity3">
 
-    <EditText
-        android:id="@+id/etPhone"
-        android:hint="Enter your phone number"
-        android:inputType="phone"
-        android:textSize="18sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:background="@android:drawable/edit_text" />
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/btnSave"
-        android:text="Save Number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="12dp"
-        android:backgroundTint="@android:color/holo_blue_light" />
+        <Button
+            android:id="@+id/sosButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="🚨 SOS" />
+
+        <Button
+            android:id="@+id/safeButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="✅ I'm Safe"
+            android:layout_marginStart="8dp" />
+
+        <Button
+            android:id="@+id/viewMapButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="🗺️ View Map"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
 </LinearLayout>

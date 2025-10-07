@@ -14,28 +14,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.emergency.mesh.R
 import com.emergency.mesh.data.MessageRepository2
 import com.emergency.mesh.data.RoomMessageRepository
-import com.emergency.mesh.databinding.ActivityMainBinding
+import com.emergency.mesh.databinding.ActivityMain3Binding
 import com.emergency.mesh.db.AppDatabase
 import com.emergency.mesh.p2p.MeshManager
 import com.google.android.gms.location.LocationServices
 
 class MainActivity3 : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMain3Binding
     private val messageAdapter = MessageAdapter()
     private val fusedLocationClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
 
-    // ✅ Updated ViewModel initialization
+    // ✅ ViewModel setup
     private val messageViewModel: MessageViewModel by viewModels {
         val context = this@MainActivity3
         val database = AppDatabase.getDatabase(context)
-        val repository: MessageRepository2 = RoomMessageRepository(database.messageDao(), getUserPhoneNumber(context))
+        val repository: MessageRepository2 =
+            RoomMessageRepository(database.messageDao(), getUserPhoneNumber(context))
         val meshManager = MeshManager(context)
         ViewModelFactory(repository, meshManager, getUserPhoneNumber(this))
     }
 
     private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show()
             } else {
@@ -45,7 +46,8 @@ class MainActivity3 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        // ✅ Correct binding for activity_main3.xml
+        binding = ActivityMain3Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupRecyclerView()
@@ -109,7 +111,10 @@ class MainActivity3 : AppCompatActivity() {
     }
 
     private fun hasLocationPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun checkLocationPermission() {
@@ -118,7 +123,6 @@ class MainActivity3 : AppCompatActivity() {
         }
     }
 
-    // ✅ Added function to get the user's phone number
     private fun getUserPhoneNumber(context: android.content.Context): String {
         return try {
             val telephonyManager = context.getSystemService(TELEPHONY_SERVICE) as TelephonyManager

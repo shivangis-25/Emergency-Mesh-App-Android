@@ -5,17 +5,18 @@ import androidx.room.Room
 import com.emergency.mesh.data.AppDatabase
 
 object DatabaseProvider {
-    @Volatile
-    private var INSTANCE: AppDatabase? = null
+    private var database: AppDatabase? = null
 
-    fun getInstance(context: Context): AppDatabase {
-        return INSTANCE ?: synchronized(this) {
+    fun getDatabase(context: Context): AppDatabase {
+        return database ?: synchronized(this) {
             val instance = Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,
-                "mesh_database"
-            ).build()
-            INSTANCE = instance
+                "emergency_mesh_database"
+            )
+                .fallbackToDestructiveMigration() // For development - removes this in production
+                .build()
+            database = instance
             instance
         }
     }
