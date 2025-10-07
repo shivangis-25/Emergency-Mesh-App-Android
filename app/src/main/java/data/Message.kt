@@ -11,5 +11,7 @@ data class Message(
     val latitude: Double,
     val longitude: Double,
     val timestamp: Long,
-    val isSynced: Boolean
-) : Parcelable // Add this interface to make it "parcelable"
+    val isSynced: Boolean,
+    val senderNumber: String
+)
+    : Parcelable // Add this interface to make it "parcelable"

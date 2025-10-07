@@ -6,10 +6,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 /**
- * Implementation of MessageRepository using Room.
+ * Implementation of MessageRepository2 using Room.
+ * Added support for senderNumber field.
  */
 class RoomMessageRepository(
-    private val messageDao: MessageDao
+    private val messageDao: MessageDao,
+    private val senderNumber: String // ✅ Added parameter to fix compile errors
 ) : MessageRepository2 {
 
     override suspend fun saveMessage(message: Message) {
@@ -20,7 +22,8 @@ class RoomMessageRepository(
             longitude = message.longitude,
             timestamp = message.timestamp,
             isSynced = message.isSynced,
-            messageType = message.messageType
+            messageType = message.messageType,
+            senderNumber = message.senderNumber // ✅ Store sender’s number in DB
         )
         messageDao.insert(entity)
     }
@@ -43,6 +46,7 @@ class RoomMessageRepository(
             longitude = longitude,
             timestamp = timestamp,
             isSynced = isSynced,
-            messageType = messageType
+            messageType = messageType,
+            senderNumber = senderNumber // ✅ Pass senderNumber to model
         )
 }

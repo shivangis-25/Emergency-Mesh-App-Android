@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -24,12 +25,13 @@ class MainActivity3 : AppCompatActivity() {
     private val messageAdapter = MessageAdapter()
     private val fusedLocationClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
 
+    // ✅ Updated ViewModel initialization
     private val messageViewModel: MessageViewModel by viewModels {
         val context = this@MainActivity3
         val database = AppDatabase.getDatabase(context)
-        val repository: MessageRepository2 = RoomMessageRepository(database.messageDao())
+        val repository: MessageRepository2 = RoomMessageRepository(database.messageDao(), getUserPhoneNumber(context))
         val meshManager = MeshManager(context)
-        ViewModelFactory(repository, meshManager)
+        ViewModelFactory(repository, meshManager, getUserPhoneNumber(this))
     }
 
     private val requestPermissionLauncher =
@@ -91,9 +93,9 @@ class MainActivity3 : AppCompatActivity() {
                 fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
                         messageViewModel.sendMessage(text, type, location.latitude, location.longitude)
-                        Toast.makeText(this, "$type message saved!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "$type message sent!", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Could not get current location. Please try again.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Could not get current location.", Toast.LENGTH_SHORT).show()
                     }
                 }.addOnFailureListener {
                     Toast.makeText(this, "Failed to get location.", Toast.LENGTH_SHORT).show()
@@ -115,5 +117,16 @@ class MainActivity3 : AppCompatActivity() {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
-}
 
+    // ✅ Added function to get the user's phone number
+    private fun getUserPhoneNumber(context: android.content.Context): String {
+        return try {
+            val telephonyManager = context.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+            telephonyManager.line1Number ?: "Unknown"
+        } catch (e: SecurityException) {
+            "Unknown"
+        } catch (e: Exception) {
+            "Unknown"
+        }
+    }
+}

@@ -10,12 +10,13 @@ import androidx.annotation.Keep
  */
 @Entity(tableName = "messages")
 data class MessageEntity(
-    @PrimaryKey val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey val id: String,
+    val senderNumber: String,  // 👈 Add this too
     val text: String,
+    val messageType: String,
     val latitude: Double,
     val longitude: Double,
-    val locationName: String? = null, // e.g., "Bengaluru, Karnataka, India"
-    val timestamp: Long = System.currentTimeMillis(),
-    val isSynced: Boolean = false,
-    val messageType: String = "SOS" // default type, can be "SOS" or "SAFE"
+    val timestamp: Long,
+    val isSynced: Boolean
 )
+

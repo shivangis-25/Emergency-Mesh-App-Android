@@ -9,22 +9,13 @@ import java.util.UUID
 
 class MessageViewModel(
     private val repository: MessageRepository2,
-    private val meshManager: MeshManager
+    private val meshManager: MeshManager,
+    private val senderNumber: String // ✅ Added parameter
 ) : ViewModel() {
 
-    // A flow of all messages from the database, collected as LiveData
     val allMessages: LiveData<List<Message>> = repository.getAllMessages().asLiveData()
 
-    /**
-     * Creates and saves a new message, then passes it to the MeshManager to be broadcast.
-     *
-     * @param text The content of the message (e.g., "SOS" or "I'm Safe").
-     * @param messageType The type of the message ("SOS" or "SAFE").
-     * @param latitude The user's current latitude.
-     * @param longitude The user's current longitude.
-     */
     fun sendMessage(text: String, messageType: String, latitude: Double, longitude: Double) {
-        // Use viewModelScope to launch a coroutine that is automatically cancelled when the ViewModel is cleared.
         viewModelScope.launch {
             val message = Message(
                 id = UUID.randomUUID().toString(),
@@ -33,13 +24,12 @@ class MessageViewModel(
                 latitude = latitude,
                 longitude = longitude,
                 timestamp = System.currentTimeMillis(),
-                isSynced = false // New messages are always initially unsynced
+                senderNumber = senderNumber, // ✅ Added this line
+                isSynced = false
             )
-            // Save the message locally first
+
             repository.saveMessage(message)
-            // Then, try to send it over the mesh network
             meshManager.sendMessage(message)
         }
     }
 }
-
