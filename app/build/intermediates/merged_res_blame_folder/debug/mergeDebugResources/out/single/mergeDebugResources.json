@@ -1,0 +1,118 @@
+[
+    {
+        "merged": "com.emergency.mesh.app-debug-65:/layout_activity_main3.xml.flat",
+        "source": "com.emergency.mesh.app-main-67:/layout/activity_main3.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_activity_home.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_activity_main3.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\activity_main3.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_activity_map.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\activity_map.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\drawable_indicator_safe.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\drawable\\indicator_safe.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\drawable_ic_red_pin.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\drawable\\ic_red_pin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\drawable_indicator_sos.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\drawable\\indicator_sos.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_activity_main1.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\activity_main1.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_item_message.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\item_message.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\drawable_ic_green_pin.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\drawable\\ic_green_pin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_item_contact.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\item_contact.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\layout_activity_manage_contacts.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\layout\\activity_manage_contacts.xml"
+    },
+    {
+        "merged": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-debug-65:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Rohin Nandan\\.gradle\\daemon\\8.13\\com.emergency.mesh.app-main-67:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    }
+]

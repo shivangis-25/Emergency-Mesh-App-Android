@@ -1,0 +1,308 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.emergency.mesh"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <!-- Permissions required for the app -->
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:6:5-79
+12-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.SEND_SMS" />
+13-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:7:5-67
+13-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:7:22-64
+14    <uses-permission android:name="android.permission.READ_CONTACTS" />
+14-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:8:5-72
+14-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:8:22-69
+15    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+15-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:9:5-81
+15-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:9:22-78
+16    <!-- <uses-permission android:name="android.permission.SEND_SMS" /> -->
+17    <uses-permission android:name="android.permission.READ_CONTACTS" />
+17-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:8:5-72
+17-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:8:22-69
+18    <uses-permission android:name="android.permission.INTERNET" />
+18-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:12:5-67
+18-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:12:22-64
+19    <uses-permission
+19-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:13:5-108
+20        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+20-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:13:22-78
+21        android:maxSdkVersion="28" />
+21-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:13:79-105
+22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+22-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:6:5-79
+22-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:6:22-76
+23    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+23-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:9:5-81
+23-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:9:22-78
+24
+25    <!-- Bluetooth permissions for P2P -->
+26    <uses-permission android:name="android.permission.BLUETOOTH" />
+26-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:19:5-68
+26-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:19:22-65
+27    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+27-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:20:5-74
+27-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:20:22-71
+28    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+28-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:21:5-78
+28-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:21:22-75
+29    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+29-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:22:5-76
+29-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:22:22-73
+30    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+30-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:23:5-73
+30-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:23:22-70
+31    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+31-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:24:5-78
+31-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:24:22-75
+32    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+32-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:25:5-76
+32-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:25:22-73
+33    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+33-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:26:5-76
+33-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:26:22-73
+34    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+34-->[com.google.android.gms:play-services-nearby:19.0.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\d743b7b531f4780fe8e8fbb01dd5c4f4\transformed\play-services-nearby-19.0.0\AndroidManifest.xml:7:5-79
+34-->[com.google.android.gms:play-services-nearby:19.0.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\d743b7b531f4780fe8e8fbb01dd5c4f4\transformed\play-services-nearby-19.0.0\AndroidManifest.xml:7:22-76
+35
+36    <permission
+36-->[androidx.core:core:1.13.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\4a3978817cdb8822d45dddac0aeaacc9\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+37        android:name="com.emergency.mesh.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+37-->[androidx.core:core:1.13.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\4a3978817cdb8822d45dddac0aeaacc9\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+38        android:protectionLevel="signature" />
+38-->[androidx.core:core:1.13.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\4a3978817cdb8822d45dddac0aeaacc9\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+39
+40    <uses-permission android:name="com.emergency.mesh.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+40-->[androidx.core:core:1.13.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\4a3978817cdb8822d45dddac0aeaacc9\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+40-->[androidx.core:core:1.13.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\4a3978817cdb8822d45dddac0aeaacc9\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+41
+42    <supports-screens
+42-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:9:5-12:40
+43        android:anyDensity="true"
+43-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:10:9-34
+44        android:largeScreens="true"
+44-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:11:9-36
+45        android:normalScreens="true" />
+45-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:12:9-37
+46
+47    <uses-feature
+47-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:14:5-16:36
+48        android:name="android.hardware.location.network"
+48-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:15:9-57
+49        android:required="false" />
+49-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:16:9-33
+50    <uses-feature
+50-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:17:5-19:36
+51        android:name="android.hardware.location.gps"
+51-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:18:9-53
+52        android:required="false" />
+52-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:19:9-33
+53    <uses-feature
+53-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:20:5-22:36
+54        android:name="android.hardware.telephony"
+54-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:21:9-50
+55        android:required="false" />
+55-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:22:9-33
+56    <uses-feature
+56-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:23:5-25:36
+57        android:name="android.hardware.wifi"
+57-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:24:9-45
+58        android:required="false" />
+58-->[org.osmdroid:osmdroid-android:6.1.16] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\7671080a0b1240ffd5bdcf2f03143941\transformed\osmdroid-android-6.1.16\AndroidManifest.xml:25:9-33
+59
+60    <application
+60-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:28:5-74:19
+61        android:allowBackup="true"
+61-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:29:9-35
+62        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+62-->[androidx.core:core:1.13.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\4a3978817cdb8822d45dddac0aeaacc9\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+63        android:dataExtractionRules="@xml/data_extraction_rules"
+63-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:30:9-65
+64        android:debuggable="true"
+65        android:extractNativeLibs="false"
+66        android:fullBackupContent="@xml/backup_rules"
+66-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:31:9-54
+67        android:icon="@mipmap/ic_launcher"
+67-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:32:9-43
+68        android:label="@string/app_name"
+68-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:33:9-41
+69        android:roundIcon="@mipmap/ic_launcher_round"
+69-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:34:9-54
+70        android:supportsRtl="true"
+70-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:35:9-35
+71        android:testOnly="true"
+72        android:theme="@style/Theme.EmergencyMeshApp" >
+72-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:36:9-54
+73
+74        <!-- HOME ACTIVITY - Main Launcher -->
+75        <activity
+75-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:40:9-47:20
+76            android:name="com.emergency.mesh.HomeActivity"
+76-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:41:13-41
+77            android:exported="true" >
+77-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:42:13-36
+78            <intent-filter>
+78-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:43:13-46:29
+79                <action android:name="android.intent.action.MAIN" />
+79-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:44:17-69
+79-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:44:25-66
+80
+81                <category android:name="android.intent.category.LAUNCHER" />
+81-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:45:17-77
+81-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:45:27-74
+82            </intent-filter>
+83        </activity>
+84
+85        <!-- Emergency SMS Activity (Dev2) -->
+86        <activity
+86-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:50:9-52:40
+87            android:name="com.emergency.mesh.MainActivity"
+87-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:51:13-41
+88            android:exported="false" />
+88-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:52:13-37
+89
+90        <!-- Mesh Network Activity (Dev1) -->
+91        <activity
+91-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:55:9-57:40
+92            android:name="com.emergency.mesh.MainActivity1"
+92-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:56:13-42
+93            android:exported="false" />
+93-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:57:13-37
+94
+95        <!-- Emergency Map Activity (Dev3) -->
+96        <activity
+96-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:60:9-62:40
+97            android:name="com.emergency.mesh.ui.MainActivity3"
+97-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:61:13-45
+98            android:exported="false" />
+98-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:62:13-37
+99
+100        <!-- Maps Activity -->
+101        <activity
+101-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:65:9-67:40
+102            android:name="com.emergency.mesh.ui.MapActivity"
+102-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:66:13-43
+103            android:exported="false" />
+103-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:67:13-37
+104        <activity
+104-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:68:9-71:57
+105            android:name="com.emergency.mesh.ManageContactsActivity"
+105-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:69:13-51
+106            android:exported="true"
+106-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:70:13-36
+107            android:label="Manage Emergency Contacts" />
+107-->C:\Users\Rohin Nandan\StudioProjects\Emergency-Mesh-App-Android-pp\app\src\main\AndroidManifest.xml:71:13-54
+108        <activity
+108-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\ea99b136fd02b1e8bbd53d05f107ff10\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+109            android:name="androidx.compose.ui.tooling.PreviewActivity"
+109-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\ea99b136fd02b1e8bbd53d05f107ff10\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+110            android:exported="true" />
+110-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\ea99b136fd02b1e8bbd53d05f107ff10\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+111
+112        <service
+112-->[com.google.android.gms:play-services-nearby:19.0.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\d743b7b531f4780fe8e8fbb01dd5c4f4\transformed\play-services-nearby-19.0.0\AndroidManifest.xml:10:9-13:105
+113            android:name="com.google.android.gms.nearby.exposurenotification.WakeUpService"
+113-->[com.google.android.gms:play-services-nearby:19.0.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\d743b7b531f4780fe8e8fbb01dd5c4f4\transformed\play-services-nearby-19.0.0\AndroidManifest.xml:11:13-92
+114            android:exported="true"
+114-->[com.google.android.gms:play-services-nearby:19.0.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\d743b7b531f4780fe8e8fbb01dd5c4f4\transformed\play-services-nearby-19.0.0\AndroidManifest.xml:12:13-36
+115            android:permission="com.google.android.gms.nearby.exposurenotification.EXPOSURE_CALLBACK" />
+115-->[com.google.android.gms:play-services-nearby:19.0.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\d743b7b531f4780fe8e8fbb01dd5c4f4\transformed\play-services-nearby-19.0.0\AndroidManifest.xml:13:13-102
+116
+117        <activity
+117-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\bb8ca9b0c96b6863c1cea59e33f168d7\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+118            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+118-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\bb8ca9b0c96b6863c1cea59e33f168d7\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+119            android:exported="false"
+119-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\bb8ca9b0c96b6863c1cea59e33f168d7\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+120            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+120-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\bb8ca9b0c96b6863c1cea59e33f168d7\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+121
+122        <meta-data
+122-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\125179aa884fbd19d34e998c49ce49d5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+123            android:name="com.google.android.gms.version"
+123-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\125179aa884fbd19d34e998c49ce49d5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+124            android:value="@integer/google_play_services_version" />
+124-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\125179aa884fbd19d34e998c49ce49d5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+125
+126        <provider
+126-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\aeac6f02faef62f325d3962b41c5373b\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+127            android:name="androidx.startup.InitializationProvider"
+127-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\aeac6f02faef62f325d3962b41c5373b\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
+128            android:authorities="com.emergency.mesh.androidx-startup"
+128-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\aeac6f02faef62f325d3962b41c5373b\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
+129            android:exported="false" >
+129-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\aeac6f02faef62f325d3962b41c5373b\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
+130            <meta-data
+130-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\aeac6f02faef62f325d3962b41c5373b\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+131                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+131-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\aeac6f02faef62f325d3962b41c5373b\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+132                android:value="androidx.startup" />
+132-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\aeac6f02faef62f325d3962b41c5373b\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+133            <meta-data
+133-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\02eceee2ad0a8cce2709b8b15bd0c6bb\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+134                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+134-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\02eceee2ad0a8cce2709b8b15bd0c6bb\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+135                android:value="androidx.startup" />
+135-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\02eceee2ad0a8cce2709b8b15bd0c6bb\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+136            <meta-data
+136-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+137                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+138                android:value="androidx.startup" />
+138-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+139        </provider>
+140
+141        <service
+141-->[androidx.room:room-runtime:2.6.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\9ecb668d179d3fbaa18bb6aee36db5ac\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+142            android:name="androidx.room.MultiInstanceInvalidationService"
+142-->[androidx.room:room-runtime:2.6.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\9ecb668d179d3fbaa18bb6aee36db5ac\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+143            android:directBootAware="true"
+143-->[androidx.room:room-runtime:2.6.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\9ecb668d179d3fbaa18bb6aee36db5ac\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+144            android:exported="false" />
+144-->[androidx.room:room-runtime:2.6.1] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\9ecb668d179d3fbaa18bb6aee36db5ac\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+145
+146        <receiver
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+147            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+147-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+148            android:directBootAware="false"
+148-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+149            android:enabled="true"
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+150            android:exported="true"
+150-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+151            android:permission="android.permission.DUMP" >
+151-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+152            <intent-filter>
+152-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+153                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+154            </intent-filter>
+155            <intent-filter>
+155-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+156                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+157            </intent-filter>
+158            <intent-filter>
+158-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+159                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+159-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+159-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+160            </intent-filter>
+161            <intent-filter>
+161-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+162                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+162-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+162-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Rohin Nandan\.gradle\caches\8.13\transforms\c8b0227330a3281e5c9b3db160bc587b\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+163            </intent-filter>
+164        </receiver>
+165    </application>
+166
+167</manifest>
