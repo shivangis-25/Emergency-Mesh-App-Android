@@ -17,7 +17,7 @@ import java.util.*
 
 /**
  * P2PManager handles peer-to-peer communication using Google Nearby Connections API.
- * Implements advertising, discovery, and message sending/receiving.
+ * Implements advertising, discovery, and message sending/receiving with proper hop count handling.
  */
 class P2PManager(
     private val context: Context,
@@ -106,7 +106,13 @@ class P2PManager(
                         val message = parseMessage(jsonString)
                         val readableTime = formatTimestamp(message.timestamp)
                         Log.d(TAG, "Message received at $readableTime from $endpointId: ${message.content}")
+
+                        // Notify listener
                         listener?.invoke(message)
+
+                        // Forward message to other peers (avoid sending back to sender)
+                        forwardMessage(message, excludeEndpoint = endpointId)
+
                     } catch (e: Exception) {
                         Log.e(TAG, "Error parsing received message", e)
                     }
@@ -250,22 +256,45 @@ class P2PManager(
             return
         }
         try {
-            val jsonString = serializeMessage(message)
-            val bytes = jsonString.toByteArray(StandardCharsets.UTF_8)
-            val payload = Payload.fromBytes(bytes)
-            connectedEndpoints.forEach { endpointId ->
-                connectionsClient.sendPayload(endpointId, payload)
-                    .addOnSuccessListener {
-                        val readableTime = formatTimestamp(message.timestamp)
-                        Log.d(TAG, "Message sent at $readableTime to: $endpointId")
-                    }
-                    .addOnFailureListener { e -> Log.e(TAG, "Failed to send message to: $endpointId", e) }
-            }
-            statusListener?.invoke("Message sent to ${connectedEndpoints.size} peer(s)")
+            // Increment hopCount for sending/forwarding
+            val messageToSend = message.copy(hopCount = message.hopCount + 1)
+            sendPayloadToAll(messageToSend)
         } catch (e: Exception) {
             Log.e(TAG, "Error sending message", e)
             statusListener?.invoke("Failed to send message: ${e.message}")
         }
+    }
+
+    /**
+     * Forward a received message to all peers except excluded endpoint
+     */
+    private fun forwardMessage(message: Message, excludeEndpoint: String? = null) {
+        if (connectedEndpoints.isEmpty()) return
+        val messageToForward = message.copy(hopCount = message.hopCount + 1)
+        connectedEndpoints.filter { it != excludeEndpoint }.forEach { endpointId ->
+            sendPayloadToEndpoint(endpointId, messageToForward)
+        }
+    }
+
+    private fun sendPayloadToAll(message: Message) {
+        connectedEndpoints.forEach { endpointId ->
+            sendPayloadToEndpoint(endpointId, message)
+        }
+    }
+
+    private fun sendPayloadToEndpoint(endpointId: String, message: Message) {
+        val jsonString = serializeMessage(message)
+        val bytes = jsonString.toByteArray(StandardCharsets.UTF_8)
+        val payload = Payload.fromBytes(bytes)
+        connectionsClient.sendPayload(endpointId, payload)
+            .addOnSuccessListener {
+                val readableTime = formatTimestamp(message.timestamp)
+                Log.d(TAG, "Message sent at $readableTime to: $endpointId, hopCount: ${message.hopCount}")
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Failed to send message to: $endpointId", e)
+            }
+        statusListener?.invoke("Message sent to ${connectedEndpoints.size} peer(s)")
     }
 
     fun shutdown() {
