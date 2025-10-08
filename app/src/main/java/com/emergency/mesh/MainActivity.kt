@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.widget.Button
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         val btnSendEmergency: Button = findViewById(R.id.btnSendEmergency)
         val btnManageContacts: Button = findViewById(R.id.btnManageContacts)
 
-        // Send emergency alert button
+        // Send emergency alert
         btnSendEmergency.setOnClickListener {
             checkAndRequestPermissions()
         }
@@ -64,8 +65,7 @@ class MainActivity : AppCompatActivity() {
         val requiredPermissions = listOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.SEND_SMS,
-            Manifest.permission.READ_CONTACTS
+            Manifest.permission.SEND_SMS
         )
 
         for (permission in requiredPermissions) {
@@ -132,33 +132,40 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendEmergencySmsToContacts(latitude: Double, longitude: Double) {
-        val message =
-            "🚨 Emergency! I need help. My location: https://maps.google.com/?q=$latitude,$longitude"
+        val message = """
+🚨 Emergency! I need help.
+
+📍 My current location:
+Latitude: $latitude
+Longitude: $longitude
+
+🌐 Open in Google Maps:
+https://maps.google.com/?q=$latitude,$longitude
+
+(If you’re offline, open Google Maps and search these coordinates manually.)
+""".trimIndent()
+
+        val hasSmsPermission = ContextCompat.checkSelfPermission(
+            this, Manifest.permission.SEND_SMS
+        ) == PackageManager.PERMISSION_GRANTED
+
+        Toast.makeText(this, "SMS Permission: $hasSmsPermission", Toast.LENGTH_SHORT).show()
 
         lifecycleScope.launch {
+            val contacts = emergencyRepository.getAllContacts()
+            Toast.makeText(this@MainActivity, "Contacts found: ${contacts.size}", Toast.LENGTH_SHORT).show()
+
+            contacts.forEach {
+                Toast.makeText(this@MainActivity, "Will send to: ${it.name} - ${it.phoneNumber}", Toast.LENGTH_LONG).show()
+            }
+
             emergencyRepository.sendEmergencyAlert(message).fold(
                 onSuccess = {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "✅ Emergency alerts sent to all contacts!",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@MainActivity, "✅ Emergency SMS sent successfully!", Toast.LENGTH_LONG).show()
                 },
                 onFailure = { error ->
-                    val errorMessage = when (error) {
-                        is IllegalStateException -> "No emergency contacts configured. Please add contacts first."
-                        is SecurityException -> "SMS permission required."
-                        else -> "Failed to send alerts: ${error.message}"
-                    }
-
-                    Snackbar.make(
-                        findViewById(android.R.id.content),
-                        errorMessage,
-                        Snackbar.LENGTH_LONG
-                    ).setAction("Manage Contacts") {
-                        val intent = Intent(this@MainActivity, ManageContactsActivity::class.java)
-                        startActivity(intent)
-                    }.show()
+                    Toast.makeText(this@MainActivity, "❌ ERROR: ${error.message}", Toast.LENGTH_LONG).show()
+                    error.printStackTrace()
                 }
             )
         }

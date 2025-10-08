@@ -21,14 +21,16 @@
         android:padding="12dp"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="40dp" />
 
     <!-- 🔹 Map View -->
     <org.osmdroid.views.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/bottomButtonsLayout"
         android:layout_below="@id/tvHeading" />
+
 
     <!-- 🔹 Bottom Control Bar -->
     <LinearLayout
@@ -54,7 +56,7 @@
             android:backgroundTint="@android:color/holo_red_dark"
             android:textColor="@android:color/white" />
 
-        <!-- 🗺️ View Map Button (center) -->
+        <!-- 🗺️ View Map Button -->
         <Button
             android:id="@+id/btn_view_map"
             android:layout_width="0dp"

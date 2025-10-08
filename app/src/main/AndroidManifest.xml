@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.emergency.mesh">
 
-    <!-- Permissions required for the app -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<!--    <uses-permission android:name="android.permission.SEND_SMS" />-->
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 🌐 Core Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
 
+    <!-- 📍 Location (required for map + Wi-Fi Direct) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- Bluetooth permissions for P2P -->
+    <!-- 📶 Wi-Fi & P2P -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.NEARBY_WIFI_DEVICES"
+        android:usesPermissionFlags="neverForLocation" />
+
+    <!-- 🔵 Bluetooth (for mesh discovery on Android 12+) -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!-- ✉️ SMS and Contacts -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- 📢 Notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 💾 Legacy storage (for Android 9 and below only) -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <application
         android:allowBackup="true"
@@ -36,7 +49,7 @@
         android:theme="@style/Theme.EmergencyMeshApp"
         tools:targetApi="31">
 
-        <!-- HOME ACTIVITY - Main Launcher -->
+        <!-- 🏠 Home Activity (Launcher) -->
         <activity
             android:name=".HomeActivity"
             android:exported="true">
@@ -46,31 +59,30 @@
             </intent-filter>
         </activity>
 
-        <!-- Emergency SMS Activity (Dev2) -->
+        <!-- 📱 Emergency SMS Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
-        <!-- Mesh Network Activity (Dev1) -->
+        <!-- 🔗 Mesh Network Activity -->
         <activity
             android:name=".MainActivity1"
             android:exported="false" />
 
-        <!-- Emergency Map Activity (Dev3) -->
+        <!-- 🗺️ Emergency Map Activity -->
         <activity
             android:name=".ui.MainActivity3"
             android:exported="false" />
 
-        <!-- Maps Activity -->
+        <!-- 🗺️ Map Display Activity -->
         <activity
             android:name=".ui.MapActivity"
             android:exported="false" />
+
+        <!-- 👥 Manage Contacts -->
         <activity
             android:name=".ManageContactsActivity"
             android:exported="true"
             android:label="Manage Emergency Contacts" />
-
-
     </application>
-
 </manifest>

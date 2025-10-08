@@ -70,6 +70,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:2.6.0")
 
     // ViewModel and LiveData
+    implementation("com.android.volley:volley:1.2.1")
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
