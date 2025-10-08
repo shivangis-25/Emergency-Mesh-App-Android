@@ -24,11 +24,14 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
 
-    <!-- ✉️ SMS and Contacts -->
+    <!-- ✉ SMS and Contacts -->
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--permission for backend-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- 📢 Notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -69,12 +72,12 @@
             android:name=".MainActivity1"
             android:exported="false" />
 
-        <!-- 🗺️ Emergency Map Activity -->
+        <!-- 🗺 Emergency Map Activity -->
         <activity
             android:name=".ui.MainActivity3"
             android:exported="false" />
 
-        <!-- 🗺️ Map Display Activity -->
+        <!-- 🗺 Map Display Activity -->
         <activity
             android:name=".ui.MapActivity"
             android:exported="false" />

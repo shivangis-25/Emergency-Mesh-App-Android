@@ -14,17 +14,19 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.emergnecymesh.model.Message
 import com.example.emergnecymesh.p2p.P2PManager
+import com.example.emergnecymesh.sync.SyncManager
 import java.util.UUID
 
 class MainActivity1 : AppCompatActivity() {
 
     companion object {
-        private const val TAG = "MainActivity"
+        private const val TAG = "MainActivity1"
         private const val PERMISSION_REQUEST_CODE = 100
     }
 
     private lateinit var p2pManager: P2PManager
     private lateinit var deviceId: String
+    private lateinit var syncManager: SyncManager
 
     private lateinit var messageInput: EditText
     private lateinit var sendButton: Button
@@ -40,8 +42,23 @@ class MainActivity1 : AppCompatActivity() {
         // Generate unique device ID
         deviceId = "Device_${UUID.randomUUID().toString().substring(0, 8)}"
 
+        // Initialize views and permissions
         initializeViews()
         checkAndRequestPermissions()
+
+        // Initialize SyncManager (Backend connection)
+        syncManager = SyncManager(this)
+        syncManager.onSyncComplete = { success, count ->
+            if (success) {
+                Toast.makeText(this, "Synced $count item(s)", Toast.LENGTH_SHORT).show()
+            }
+        }
+        syncManager.onSyncError = { error ->
+            Toast.makeText(this, "Sync failed: $error", Toast.LENGTH_SHORT).show()
+        }
+        syncManager.startMonitoring()
+
+        updateStatus("Device ready: $deviceId")
     }
 
     private fun initializeViews() {
@@ -56,9 +73,8 @@ class MainActivity1 : AppCompatActivity() {
         stopButton.setOnClickListener { stopP2P() }
         sendButton.setOnClickListener { sendMessage() }
 
-        updateStatus("Ready to start")
+        updateStatus("Ready to start P2P")
     }
-
 
     private fun checkAndRequestPermissions() {
         val permissions = mutableListOf<String>()
@@ -74,7 +90,7 @@ class MainActivity1 : AppCompatActivity() {
             permissions.add(Manifest.permission.BLUETOOTH_ADMIN)
         }
 
-        // Location permissions (required for Nearby)
+        // Location permissions
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
 
@@ -131,17 +147,24 @@ class MainActivity1 : AppCompatActivity() {
                         "Hops: ${message.hopCount}\n\n"
 
                 receivedText.text = receivedMsg + receivedText.text
-                // ... rest of code
+
+                // Sync received messages to backend (optional)
+                syncManager.sendEmergencyAlert(
+                    deviceId = message.senderId,
+                    latitude = message.latitude,
+                    longitude = message.longitude,
+                    message = message.content,
+                    phoneNumber = "N/A" // Optional if not applicable
+                )
             }
         }
-        updateStatus("P2P Manager initialized - Device: $deviceId")
+        updateStatus("P2P initialized - Device: $deviceId")
     }
 
     private fun startP2P() {
         try {
             p2pManager.startAdvertising()
             p2pManager.startDiscovery()
-
             updateStatus("Advertising and discovering... Connected peers: 0")
             Toast.makeText(this, "P2P started", Toast.LENGTH_SHORT).show()
 
@@ -188,15 +211,24 @@ class MainActivity1 : AppCompatActivity() {
             val message = Message(
                 senderId = deviceId,
                 content = content,
-                latitude = 0.0, // Add GPS integration later
+                latitude = 0.0, // Replace with real GPS data later
                 longitude = 0.0
             )
 
+            // Send over P2P mesh
             p2pManager.sendMessage(message)
-
             messageInput.text.clear()
             Toast.makeText(this, "Message sent", Toast.LENGTH_SHORT).show()
             Log.d(TAG, "Message sent: $message")
+
+            // Also sync this message to backend
+            syncManager.sendEmergencyAlert(
+                deviceId = deviceId,
+                latitude = message.latitude,
+                longitude = message.longitude,
+                message = message.content,
+                phoneNumber = "N/A"
+            )
 
         } catch (e: Exception) {
             Log.e(TAG, "Error sending message", e)
@@ -213,6 +245,9 @@ class MainActivity1 : AppCompatActivity() {
         super.onDestroy()
         if (::p2pManager.isInitialized) {
             p2pManager.shutdown()
+        }
+        if (::syncManager.isInitialized) {
+            syncManager.stopMonitoring()
         }
     }
 }
