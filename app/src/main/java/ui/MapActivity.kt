@@ -19,6 +19,8 @@ import org.osmdroid.config.Configuration
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MapActivity : AppCompatActivity() {
 
@@ -35,60 +37,36 @@ class MapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // === IMPORTANT: load osmdroid config then set content view ===
+        // Load OSMdroid configuration
         Configuration.getInstance().load(
             applicationContext,
             PreferenceManager.getDefaultSharedPreferences(applicationContext)
         )
 
-        // <-- this line MUST be here so findViewById can find views in activity_map.xml
         setContentView(R.layout.activity_map)
 
-        // Map & location
+        // Initialize map and location
         mapView = findViewById(R.id.map)
         mapView.setMultiTouchControls(true)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        // P2P Mesh and ViewModel
+        // Mesh + ViewModel
         meshManager = MeshManager(this)
         val factory = ViewModelFactory(meshManager)
         messageViewModel = ViewModelProvider(this, factory)[MessageViewModel::class.java]
 
-        // Buttons (IDs must match activity_map.xml)
-        val btnAlert = findViewById<Button>(R.id.btn_sos)     // SOS
-        val btnSafe = findViewById<Button>(R.id.btn_safe)       // I'm Safe
-        val btnViewMap = findViewById<Button>(R.id.btn_view_map)
+        val btnAlert = findViewById<Button>(R.id.btn_sos)
+        val btnSafe = findViewById<Button>(R.id.btn_safe)
 
-        btnViewMap.setOnClickListener { centerOnLastLocation() }
+        btnAlert.setOnClickListener { getLocationAndSend(isSOS = true) }
+        btnSafe.setOnClickListener { getLocationAndSend(isSOS = false) }
 
-        btnAlert.setOnClickListener {
-            getLocationAndSend(isSOS = true)
-        }
-
-        btnSafe.setOnClickListener {
-            getLocationAndSend(isSOS = false)
-        }
-
-        // Listen for incoming P2P messages from other peers
+        // Listen for incoming P2P messages
         messageViewModel.listenForMessages { message ->
-            runOnUiThread {
-                handleIncomingMessage(message)
-            }
+            runOnUiThread { handleIncomingMessage(message) }
         }
 
-        // Request location permission and attempt to get last location
         requestLocationPermission()
-    }
-
-    private fun centerOnLastLocation() {
-        if (lastKnownLocation != null) {
-            val p = GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
-            mapView.controller.setCenter(p)
-            mapView.controller.setZoom(18.5)
-            mapView.invalidate()
-        } else {
-            Toast.makeText(this, "Location not available yet", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun getLocationAndSend(isSOS: Boolean) {
@@ -97,12 +75,16 @@ class MapActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
                 lastKnownLocation = location
-                // update local marker
                 updateMarker(location.latitude, location.longitude, isSOS, "Me")
-                // broadcast via ViewModel
+
                 if (isSOS) messageViewModel.sendSOS(location.latitude, location.longitude)
                 else messageViewModel.sendSafe(location.latitude, location.longitude)
-                Toast.makeText(this, "Broadcasted ${if (isSOS) "SOS" else "Safe"}", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(
+                    this,
+                    "Broadcasted ${if (isSOS) "SOS" else "Safe"}",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show()
             }
@@ -114,27 +96,28 @@ class MapActivity : AppCompatActivity() {
     private fun updateMarker(lat: Double, lon: Double, isSOS: Boolean, titlePrefix: String) {
         val point = GeoPoint(lat, lon)
 
-        // remove previous marker for this sender (we keep single local marker as example)
         userMarker?.let { mapView.overlays.remove(it) }
 
         val marker = Marker(mapView)
+        val currentTime = SimpleDateFormat("dd MMM yyyy, HH:mm:ss", Locale.getDefault()).format(Date())
+
         marker.position = point
-        marker.title = "$titlePrefix: ${if (isSOS) "🚨 SOS" else "✅ Safe"}"
-        marker.subDescription = "Lat: $lat, Lng: $lon"
+        marker.title = "$titlePrefix: ${if (isSOS) "🚨 SOS ALERT" else "✅ I'm Safe"}"
+        marker.subDescription = "Lat: %.5f, Lon: %.5f\nTime: %s".format(lat, lon, currentTime)
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
 
-        // use drawable resources red_marker / green_marker
         val drawableId = if (isSOS) R.drawable.ic_red_pin else R.drawable.ic_green_pin
         marker.icon = ContextCompat.getDrawable(this, drawableId)
 
         mapView.overlays.add(marker)
         userMarker = marker
+
         mapView.controller.setCenter(point)
+        mapView.controller.setZoom(17.5)
         mapView.invalidate()
     }
 
     private fun handleIncomingMessage(message: String) {
-        // expected format: "SOS|lat|lon" or "SAFE|lat|lon" (see MessageViewModel implementation)
         try {
             val parts = message.split("|")
             if (parts.size >= 3) {
@@ -142,7 +125,6 @@ class MapActivity : AppCompatActivity() {
                 val lat = parts[1].toDoubleOrNull()
                 val lon = parts[2].toDoubleOrNull()
                 if (lat != null && lon != null) {
-                    // for remote peers we create a new marker (or update map as you prefer)
                     val isSOS = type.equals("SOS", ignoreCase = true)
                     updateMarker(lat, lon, isSOS, "Peer")
                     Toast.makeText(this, "Received: $type @ $lat, $lon", Toast.LENGTH_LONG).show()
@@ -176,10 +158,7 @@ class MapActivity : AppCompatActivity() {
                 LOCATION_PERMISSION_REQUEST
             )
         } else {
-            // prime lastKnownLocation
-            fusedLocationClient.lastLocation.addOnSuccessListener { loc ->
-                lastKnownLocation = loc
-            }
+            fusedLocationClient.lastLocation.addOnSuccessListener { loc -> lastKnownLocation = loc }
         }
     }
 
@@ -193,11 +172,20 @@ class MapActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 fusedLocationClient.lastLocation.addOnSuccessListener { loc ->
                     lastKnownLocation = loc
-                    centerOnLastLocation()
                 }
             } else {
-                Toast.makeText(this, "Location permission required to use the map", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Location permission required", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
     }
 }

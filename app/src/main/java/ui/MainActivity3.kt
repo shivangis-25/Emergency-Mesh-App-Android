@@ -11,6 +11,9 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity3 : AppCompatActivity() {
 
@@ -20,61 +23,58 @@ class MainActivity3 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Load osmdroid configuration before inflating layout
         Configuration.getInstance().load(this, getSharedPreferences("osmdroid", MODE_PRIVATE))
         setContentView(R.layout.activity_map)
 
-        // 🔹 Initialize map properly
+        // ✅ Initialize the mapView properly
         mapView = findViewById(R.id.map)
         mapView.setTileSource(TileSourceFactory.MAPNIK)
         mapView.setMultiTouchControls(true)
         mapView.controller.setZoom(15.0)
-        val defaultPoint = GeoPoint(12.9716, 77.5946) // Bengaluru
+
+        // Default location (Bengaluru for demo)
+        val defaultPoint = GeoPoint(12.9716, 77.5946)
         mapView.controller.setCenter(defaultPoint)
 
-        // 🔹 Initialize Mesh
+        // Initialize Mesh + ViewModel
         meshManager = MeshManager(this)
         messageViewModel = MessageViewModel(meshManager)
 
-        // 🔹 Buttons
+        // Buttons
         val btnSOS = findViewById<Button>(R.id.btn_sos)
         val btnSafe = findViewById<Button>(R.id.btn_safe)
-        val btnViewMap = findViewById<Button>(R.id.btn_view_map)
 
         // 🚨 SOS button
         btnSOS.setOnClickListener {
+            val timestamp = getCurrentDateTime()
+            val message = "🚨 SOS ALERT\n📍 Lat: ${defaultPoint.latitude}, Lon: ${defaultPoint.longitude}\n🕓 $timestamp"
             Toast.makeText(this, "Sending SOS...", Toast.LENGTH_SHORT).show()
             messageViewModel.sendSOS(defaultPoint.latitude, defaultPoint.longitude)
-            addMarker(defaultPoint, "🚨 SOS ALERT", R.drawable.ic_red_pin)
+            addMarker(defaultPoint, message, R.drawable.ic_red_pin)
         }
 
         // ✅ I'm Safe button
         btnSafe.setOnClickListener {
+            val timestamp = getCurrentDateTime()
+            val message = "✅ I'M SAFE\n📍 Lat: ${defaultPoint.latitude}, Lon: ${defaultPoint.longitude}\n🕓 $timestamp"
             Toast.makeText(this, "Sending SAFE...", Toast.LENGTH_SHORT).show()
             messageViewModel.sendSafe(defaultPoint.latitude, defaultPoint.longitude)
-            addMarker(defaultPoint, "✅ I'm Safe", R.drawable.ic_green_pin)
+            addMarker(defaultPoint, message, R.drawable.ic_green_pin)
         }
 
-        // 🗺️ View Map button — recenter
-        btnViewMap.setOnClickListener {
-            mapView.controller.animateTo(defaultPoint)
-        }
-
-        // 👂 Receive mesh messages
+        // 👂 Listen for incoming messages
         messageViewModel.listenForMessages { message ->
             runOnUiThread {
                 Toast.makeText(this, "Received: $message", Toast.LENGTH_LONG).show()
-
-                // Parse if it's SOS or Safe (simple string check)
-                if (message.contains("SOS")) {
-                    addMarker(defaultPoint, message, R.drawable.ic_red_pin)
-                } else if (message.contains("SAFE")) {
-                    addMarker(defaultPoint, message, R.drawable.ic_green_pin)
-                }
+                val icon = if (message.contains("SOS")) R.drawable.ic_red_pin else R.drawable.ic_green_pin
+                addMarker(defaultPoint, message, icon)
             }
         }
     }
 
-    // 🔹 Function to add markers
+    // 🧭 Add marker with message
     private fun addMarker(point: GeoPoint, title: String, iconRes: Int) {
         val marker = Marker(mapView)
         marker.position = point
@@ -83,5 +83,11 @@ class MainActivity3 : AppCompatActivity() {
         marker.icon = getDrawable(iconRes)
         mapView.overlays.add(marker)
         mapView.invalidate()
+    }
+
+    // ⏰ Function to get formatted date-time
+    private fun getCurrentDateTime(): String {
+        val sdf = SimpleDateFormat("dd-MM-yyyy | HH:mm:ss", Locale.getDefault())
+        return sdf.format(Date())
     }
 }
