@@ -2,31 +2,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Heading -->
+    <!-- Heading (optional) -->
     <TextView
-        android:id="@+id/tv_heading"
-        android:layout_width="match_parent"
+        android:id="@+id/app_heading"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Emergency Mesh Map"
-        android:textAlignment="center"
+        android:text="Emergency Mesh Network Map"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:padding="8dp"
-        android:background="#FFCCCC"
-        android:layout_marginTop="40dp"
-        android:textColor="@android:color/black" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
 
-    <!-- Peer count top right -->
+    <!-- Peer Count - top right -->
     <TextView
         android:id="@+id/tv_peer_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Connected Peers: 0"
         android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/tv_heading"
-        android:layout_margin="8dp" />
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:layout_below="@id/app_heading"
+        android:layout_marginTop="4dp" />
 
     <!-- Map -->
     <org.osmdroid.views.MapView
@@ -36,30 +34,25 @@
         android:layout_below="@id/tv_peer_count" />
 
     <!-- Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_sos"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:text="SOS"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="12dp"
-        android:background="#CCFFFFFF">
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="24dp"
+        android:backgroundTint="@android:color/holo_red_dark" />
 
-        <Button
-            android:id="@+id/btn_sos"
-            android:text="SOS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:backgroundTint="#FF4444" />
-
-        <Button
-            android:id="@+id/btn_safe"
-            android:text="I'M SAFE"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:backgroundTint="#44FF44" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_safe"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="I'm Safe"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@android:color/holo_green_dark" />
 
 </RelativeLayout>

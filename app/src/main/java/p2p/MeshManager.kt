@@ -25,9 +25,7 @@ class MeshManager(private val context: Context) {
     private var connectionInfo: WifiP2pInfo? = null
     private var serverTask: ServerTask? = null
 
-    // 🔹 Callbacks
     var onMessageReceived: ((String) -> Unit)? = null
-    var onPeerCountChanged: ((Int) -> Unit)? = null  // ✅ Add this line
 
     init {
         manager = context.getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager
@@ -81,6 +79,7 @@ class MeshManager(private val context: Context) {
         context.registerReceiver(object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 when (intent.action) {
+
                     WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION -> {
                         if (hasLocationPermission()) {
                             manager.requestPeers(channel) { peerList ->
@@ -88,8 +87,10 @@ class MeshManager(private val context: Context) {
                                 peers.addAll(peerList.deviceList)
                                 Log.d("MeshManager", "👥 Found ${peers.size} peers")
 
-                                // ✅ Notify listener about peer count change
-                                onPeerCountChanged?.invoke(peers.size)
+                                // Auto-connect to first available peer if not connected
+                                if (connectionInfo == null && peers.isNotEmpty()) {
+                                    connectToPeer(peers[0])
+                                }
                             }
                         }
                     }
@@ -101,8 +102,11 @@ class MeshManager(private val context: Context) {
                             manager.requestConnectionInfo(channel) { info ->
                                 connectionInfo = info
                                 if (info.groupFormed && info.isGroupOwner) {
+                                    Log.d("MeshManager", "🟢 This device is Group Owner (GO)")
                                     serverTask = ServerTask(onMessageReceived)
                                     serverTask?.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+                                } else {
+                                    Log.d("MeshManager", "🟠 Connected as Client")
                                 }
                             }
                         }
@@ -112,21 +116,42 @@ class MeshManager(private val context: Context) {
         }, intentFilter)
     }
 
+    // 🔹 Auto-connect to peer to speed up network formation
+    @SuppressLint("MissingPermission")
+    private fun connectToPeer(device: WifiP2pDevice) {
+        val config = WifiP2pConfig().apply {
+            deviceAddress = device.deviceAddress
+            wps.setup = WpsInfo.PBC
+        }
+
+        manager.connect(channel, config, object : WifiP2pManager.ActionListener {
+            override fun onSuccess() {
+                Log.d("MeshManager", "🔗 Connection initiated with ${device.deviceName}")
+            }
+
+            override fun onFailure(reason: Int) {
+                Log.e("MeshManager", "⚠️ Connection failed: $reason")
+            }
+        })
+    }
+
     // 🔹 Send message
     fun sendMessage(message: String) {
         Log.d("MeshManager", "📤 Sending message: $message")
         broadcastMessage(message)
     }
 
-    // 🔹 Broadcast message
+    // 🔹 Broadcast message to peers
     @SuppressLint("StaticFieldLeak")
     private fun broadcastMessage(message: String) {
         if (connectionInfo?.isGroupOwner == true) {
+            // Group Owner sends to all connected clients
             for (peer in peers) {
                 SendTask(peer.deviceAddress, message)
                     .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
             }
         } else {
+            // Client sends only to GO
             connectionInfo?.groupOwnerAddress?.hostAddress?.let { ownerAddress ->
                 SendTask(ownerAddress, message)
                     .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
@@ -134,7 +159,7 @@ class MeshManager(private val context: Context) {
         }
     }
 
-    // 🔹 Task for sending message to one peer
+    // 🔹 Async task to send message to one peer
     private class SendTask(
         private val host: String,
         private val message: String
@@ -156,7 +181,7 @@ class MeshManager(private val context: Context) {
         }
     }
 
-    // 🔹 Server for incoming messages
+    // 🔹 Server to receive messages
     private class ServerTask(
         private val messageListener: ((String) -> Unit)?
     ) : AsyncTask<Void, String, Void>() {
@@ -187,5 +212,10 @@ class MeshManager(private val context: Context) {
                 messageListener?.invoke(msg)
             }
         }
+    }
+
+    // 🔹 Utility method to expose peer count for UI
+    fun getPeerCount(): Int {
+        return peers.size
     }
 }
